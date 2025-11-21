@@ -1,40 +1,85 @@
 .pricing-app {
- margin-top: 20px;
- /* margin-left: 40vw; */
- width: 100vw;
- height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the top within the flex container */
+  min-height: calc(
+    100vh - 120px
+  ); /* Adjust height to fit within the visible area below the navbar and above the sticky footer */
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
-
 
 .display_box {
   text-align: center;
   box-sizing: border-box;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background-color: #ffffff;
   color: #333;
-  margin: 0;
-  padding: 55px;
-  width: 80vw;
+  padding: 2.5rem;
+  max-width: 900px; /* Max width for better readability on large screens */
+  width: 100%; /* Responsive width */
+  margin-top: 2rem; /* Add some space from the top */
 }
 
+.pricing-app .header {
+  margin-bottom: 1.5rem;
+}
 
 .pricing-app .preheading {
-  font-family: dosis, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.2;
   margin: 0;
-  /* padding: 0 0 10px; */
-  font-size: 25px;
+  font-size: 1.3rem;
+  color: #1a4a72; /* Use primary color from ConferenceEvent.css */
 }
 
-.pricing-app h2 {
-  font-size: 60px;
+.pricing-app .preheading h3 {
+  font-size: 1.3rem;
+  margin: 0;
 }
 
-.right {
-  margin-right: 0;
+.pricing-app h2.price {
+  font-size: 3.5rem; /* Modern, responsive font size */
+  color: #efc16b; /* Use secondary color from ConferenceEvent.css */
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.render_items {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+/* Responsive Adjustments for TotalCost.css */
+@media (max-width: 768px) {
+  .display_box {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+
+  .pricing-app .preheading h3 {
+    font-size: 1.1rem;
+  }
+
+  .pricing-app h2.price {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .display_box {
+    padding: 1rem;
+  }
+
+  .pricing-app .preheading h3 {
+    font-size: 1rem;
+  }
+
+  .pricing-app h2.price {
+    font-size: 2rem;
+  }
 }

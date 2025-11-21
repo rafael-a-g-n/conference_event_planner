@@ -1,12 +1,14 @@
 import { useState } from "react";
 import "./ConferenceEvent.css";
 import TotalCost from "./TotalCost";
+import PropTypes from "prop-types";
 import { toggleMealSelection } from "./mealsSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 const ConferenceEvent = () => {
   const [showItems, setShowItems] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const venueItems = useSelector((state) => state.venue);
   const avItems = useSelector((state) => state.av);
@@ -118,6 +120,11 @@ const ConferenceEvent = () => {
       </>
     );
   };
+
+  ItemsDisplay.propTypes = {
+    items: PropTypes.array.isRequired,
+  };
+
   const calculateTotalCost = (section) => {
     let totalCost = 0;
     if (section === "venue") {
@@ -156,36 +163,61 @@ const ConferenceEvent = () => {
 
   return (
     <>
-      <navbar className="navbar_event_conference">
+      <nav className="navbar_event_conference">
         <div className="company_logo">Conference Expense Planner</div>
         <div className="left_navbar">
-          <div className="nav_links">
-            <a href="#venue" onClick={() => navigateToProducts("#venue")}>
+          <button
+            className="hamburger-menu"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            &#9776; {/* Hamburger icon */}
+          </button>
+          <div className={`nav_links ${isMobileMenuOpen ? "open" : ""}`}>
+            <a
+              href="#venue"
+              onClick={() => {
+                navigateToProducts("#venue");
+                setIsMobileMenuOpen(false);
+              }}
+            >
               Venue
             </a>
-            <a href="#addons" onClick={() => navigateToProducts("#addons")}>
+            <a
+              href="#addons"
+              onClick={() => {
+                navigateToProducts("#addons");
+                setIsMobileMenuOpen(false);
+              }}
+            >
               Add-ons
             </a>
-            <a href="#meals" onClick={() => navigateToProducts("#meals")}>
+            <a
+              href="#meals"
+              onClick={() => {
+                navigateToProducts("#meals");
+                setIsMobileMenuOpen(false);
+              }}
+            >
               Meals
             </a>
+            <button
+              className="details_button"
+              onClick={() => {
+                setShowItems(!showItems);
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Show Details
+            </button>
           </div>
-          <button
-            className="details_button"
-            onClick={() => setShowItems(!showItems)}
-          >
-            Show Details
-          </button>
         </div>
-      </navbar>
-      <div className="main_container">
+      </nav>
+      <div className="main_container App">
         {!showItems ? (
           <div className="items-information">
-            <div id="venue" className="venue_container container_main">
-              <div className="text">
-                <h1>Venue Room Selection</h1>
-              </div>
-              <div className="venue_selection">
+            <div id="venue" className="container_main">
+              <h1>Venue Room Selection</h1>
+              <div className="venue_selection container">
                 {venueItems.map((item, index) => (
                   <div className="venue_main" key={index}>
                     <div className="img">
@@ -260,11 +292,9 @@ const ConferenceEvent = () => {
             </div>
 
             {/*Necessary Add-ons*/}
-            <div id="addons" className="venue_container container_main">
-              <div className="text">
-                <h1> Add-ons Selection</h1>
-              </div>
-              <div className="addons_selection">
+            <div id="addons" className="container_main">
+              <h1> Add-ons Selection</h1>
+              <div className="addons_selection container">
                 {avItems.map((item, index) => (
                   <div className="av_data venue_main" key={index}>
                     <div className="img">
@@ -297,35 +327,25 @@ const ConferenceEvent = () => {
 
             {/* Meal Section */}
 
-            <div id="meals" className="venue_container container_main">
-              <div className="text">
-                <h1>Meals Selection</h1>
-              </div>
+            <div id="meals" className="container_main">
+              <h1>Meals Selection</h1>
 
-              <div className="input-container venue_selection">
-                <div className="input-container venue_selection">
-                  <label htmlFor="numberOfPeople">
-                    <h3>Number of People:</h3>
-                  </label>
-                  <input
-                    type="number"
-                    className="input_box5"
-                    id="numberOfPeople"
-                    value={numberOfPeople}
-                    onChange={(e) =>
-                      setNumberOfPeople(parseInt(e.target.value))
-                    }
-                    min="1"
-                  />
-                </div>
+              <div className="input-container">
+                <label htmlFor="numberOfPeople">
+                  <h3>Number of People:</h3>
+                </label>
+                <input
+                  type="number"
+                  className="input_box5"
+                  id="numberOfPeople"
+                  value={numberOfPeople}
+                  onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
+                  min="1"
+                />
               </div>
-              <div className="meal_selection">
+              <div className="meal_selection container">
                 {mealsItems.map((item, index) => (
-                  <div
-                    className="meal_item"
-                    key={index}
-                    style={{ padding: 15 }}
-                  >
+                  <div className="meal_item" key={index}>
                     <div className="inner">
                       <input
                         type="checkbox"

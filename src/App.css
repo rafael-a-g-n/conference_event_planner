@@ -6,16 +6,16 @@
 
 .first_page {
   display: flex;
-  height: 100vh;
+  min-height: 100vh; /* Use min-height for flexibility */
   background-image: url("https://cdn.pixabay.com/photo/2018/07/05/14/45/conference-3518465_1280.jpg");
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* Optional: for parallax effect */
   justify-content: center;
   align-items: center;
   color: white;
-  overflow: hidden; 
-  background-color: rgb(185, 186, 187);
-  /* position: relative; */
+  overflow: hidden;
+  position: relative; /* Needed for pseudo-element positioning */
 }
 
 .first_page::before {
@@ -25,83 +25,174 @@
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px);
-}
-
-.first_page h1 {
-  position: relative;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Dark overlay for better text readability */
   z-index: 1;
-}
-
-.get-started-btn {
-  background-color:#EFC16B;
-  /* color: white; */
-  color: black;
-  border: none;
-  padding: 20px 40px;
-  font-size: 19px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.get-started-btn:hover {
-  background-color: #c1974a;
-}
-
-.getstarted_btn {
-  text-align: center;
-  font-size: 30px;
 }
 
 .main_event {
   display: flex;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
   justify-content: center;
-  backdrop-filter: blur(7px);
-  gap: 100px;
-  background-color: rgba(51, 61, 80, 0.7);
-}
-
-.aboutus_main {
-  width: 800px;
-  color: white;
-  /* background-color: rgba(0,0,0,0.1); */
-
-}
-
-.aboutus_container {
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  text-align: justify;
-}
-
-.aboutus_container p {
-  font-size: 23px;
-  font-weight: 700;
-  
-
+  align-items: center;
+  gap: 3rem; /* Use rem for spacing */
+  max-width: 1200px; /* Max width for content */
+  margin: 2rem;
+  padding: 2rem;
+  background-color: rgba(51, 61, 80, 0.7); /* Background for content area */
+  backdrop-filter: blur(5px); /* Apply blur to the content area */
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative; /* Keep content above the pseudo-element overlay */
+  z-index: 2;
+  box-sizing: border-box;
 }
 
 .first_page_name_btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 30px;
-  width: 500px;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 500px; /* Max width, but responsive */
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .first_page_name_btn h1 {
-  font-size: 45px;
-  text-align: center;
+  font-size: 3.5rem; /* Responsive font size */
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
 }
 
 .first_page_name_btn p {
-  font-size: 26px;
+  font-size: 1.5rem; /* Responsive font size */
+  opacity: 0.9;
+}
+
+.get-started-btn {
+  background-color: #efc16b;
+  color: #1a4a72;
+  border: none;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.get-started-btn:hover {
+  background-color: #e0b05b;
+  transform: translateY(-2px);
+}
+
+.aboutus_main {
+  max-width: 500px; /* Max width, but responsive */
+  color: white;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.aboutus_container {
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: justify;
+}
+
+.aboutus_container h2 {
+  font-size: 1.8rem;
+  color: #efc16b;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.aboutus_container p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.8;
+  opacity: 0.85;
+}
+
+/* Responsive Adjustments for App.css */
+@media (max-width: 1024px) {
+  .main_event {
+    flex-direction: column;
+    gap: 2rem;
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .first_page_name_btn h1 {
+    font-size: 3rem;
+  }
+
+  .first_page_name_btn p {
+    font-size: 1.3rem;
+  }
+
+  .aboutus_main {
+    max-width: 100%;
+  }
+
+  .aboutus_container h2 {
+    font-size: 1.5rem;
+  }
+
+  .aboutus_container p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main_event {
+    margin: 0.5rem;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .first_page_name_btn h1 {
+    font-size: 2.5rem;
+  }
+
+  .first_page_name_btn p {
+    font-size: 1.1rem;
+  }
+
+  .get-started-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .aboutus_container h2 {
+    font-size: 1.3rem;
+  }
+
+  .aboutus_container p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .first_page_name_btn h1 {
+    font-size: 2rem;
+  }
+
+  .first_page_name_btn p {
+    font-size: 0.9rem;
+  }
+
+  .get-started-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
 }
 
 .event-list-container {

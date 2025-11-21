@@ -1,15 +1,18 @@
 import "./TotalCost.css";
 import PropTypes from "prop-types";
 
-const TotalCost = ({ totalCosts, ItemsDisplay }) => {
+const TotalCost = ({
+  totalCosts = { venue: 0, av: 0, meals: 0 },
+  ItemsDisplay = () => null,
+}) => {
   const total_amount = totalCosts.venue + totalCosts.av + totalCosts.meals;
   return (
     <div className="pricing-app">
       <div className="display_box">
         <div className="header">
-          <p className="preheading">
+          <div className="preheading">
             <h3>Total cost for the event</h3>
-          </p>
+          </div>
         </div>
         <div>
           <h2 id="pre_fee_cost_display" className="price">
@@ -31,11 +34,6 @@ TotalCost.propTypes = {
     meals: PropTypes.number.isRequired,
   }).isRequired,
   ItemsDisplay: PropTypes.elementType.isRequired,
-};
-
-TotalCost.defaultProps = {
-  totalCosts: { venue: 0, av: 0, meals: 0 },
-  ItemsDisplay: () => null,
 };
 
 export default TotalCost;
