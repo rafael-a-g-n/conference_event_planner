@@ -121,7 +121,7 @@
   opacity: 0.85;
 }
 
-/* Responsive Adjustments for App.css */
+/* Responsive Adjustments */
 @media (max-width: 1024px) {
   .main_event {
     flex-direction: column;
